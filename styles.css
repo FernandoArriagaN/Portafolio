@@ -49,6 +49,7 @@ nav {
     padding: 1rem 0;
     transition: all 0.3s ease;
 }
+
 .cursor-follower {
     position: fixed;
     top: 0;
@@ -82,8 +83,10 @@ nav {
 
 .nav-links {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     gap: 2rem;
+
 }
 
 .nav-links a {
@@ -92,6 +95,9 @@ nav {
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
+    margin: 4vw;
+  
+
 }
 
 .nav-links a:hover {
@@ -522,12 +528,7 @@ input:focus, textarea:focus {
 }
 
 /* Footer */
-footer {
-    background: var(--purple-900);
-    color: var(--white);
-    text-align: center;
-    padding: 2rem 0;
-}
+
 
 .social-links {
     display: flex;

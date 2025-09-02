@@ -347,63 +347,51 @@ gsap.to('nav', {
 });
 
 // Form submission para Netlify
-document.querySelector('.contact-form').addEventListener('submit', function(e) {
+// Form submission para Netlify (solo revisar esta parte)
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    const form = this;
-    const formData = new FormData(form);
-    const submitBtn = form.querySelector('.submit-btn');
-    
-    // Animación de carga
-    gsap.to(submitBtn, {
-        scale: 0.95,
-        duration: 0.1,
-        yoyo: true,
-        repeat: 1
-    });
-    
-    // Enviar a Netlify
+    const formData = new FormData(contactForm);
+    const submitBtn = contactForm.querySelector('.submit-btn');
+
+    // Animación de click
+    gsap.to(submitBtn, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 });
+
     fetch('/', {
-        method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
+      method: 'POST',
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
     })
     .then(() => {
-        // Mensaje de éxito con animación
-        gsap.timeline()
-            .to(submitBtn, {
-                backgroundColor: '#10b981',
-                duration: 0.3
-            })
-            .to(submitBtn, {
-                textContent: '¡Enviado!',
-                duration: 0
-            })
-            .to(submitBtn, {
-                scale: 1.05,
-                duration: 0.2,
-                yoyo: true,
-                repeat: 1
-            });
-        
-        form.reset();
-        
-        // Restaurar botón
-        gsap.delayedCall(2, () => {
-            gsap.to(submitBtn, {
-                backgroundColor: '',
-                duration: 0.3,
-                onComplete: () => {
-                    submitBtn.textContent = 'Enviar Mensaje';
-                }
-            });
-        });
+      // Mensaje de éxito con animación
+      gsap.timeline()
+        .to(submitBtn, { backgroundColor: '#10b981', duration: 0.3 })
+        .to(submitBtn, { textContent: '¡Enviado!', duration: 0 })
+        .to(submitBtn, { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 });
+
+      contactForm.reset();
+
+      // Restaurar botón a su estado original
+      gsap.delayedCall(2, () => {
+        gsap.to(submitBtn, { backgroundColor: '', duration: 0.3, onComplete: () => {
+          submitBtn.textContent = 'Enviar Mensaje';
+        }});
+      });
     })
-    .catch((error) => {
-        alert('Hubo un error al enviar el mensaje. Inténtalo de nuevo.');
-        console.error('Error:', error);
+    .catch(err => {
+      alert('Hubo un error al enviar el mensaje. Inténtalo de nuevo.');
+      console.error(err);
     });
-});// Registrar ScrollTrigger plugin
+  });
+}
+
+
+
+
+
+
+// Registrar ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 // Variables globales
@@ -806,51 +794,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Mobile menu toggle (para futuras mejoras)
-function createMobileMenu() {
-    const nav = document.querySelector('nav');
-    const navContainer = document.querySelector('.nav-container');
-    
-    // Crear botón de menú móvil
-    const mobileMenuBtn = document.createElement('button');
-    mobileMenuBtn.classList.add('mobile-menu-btn');
-    mobileMenuBtn.innerHTML = '☰';
-    mobileMenuBtn.style.display = 'none';
-    mobileMenuBtn.style.background = 'none';
-    mobileMenuBtn.style.border = 'none';
-    mobileMenuBtn.style.color = 'white';
-    mobileMenuBtn.style.fontSize = '1.5rem';
-    mobileMenuBtn.style.cursor = 'pointer';
-    
-    navContainer.appendChild(mobileMenuBtn);
-    
-    // Mostrar/ocultar menú en móvil
-    mobileMenuBtn.addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
-    
-    // Responsive behavior
-    window.addEventListener('resize', function() {
-        const navLinks = document.querySelector('.nav-links');
-        if (window.innerWidth <= 768) {
-            mobileMenuBtn.style.display = 'block';
-            navLinks.style.display = 'none';
-        } else {
-            mobileMenuBtn.style.display = 'none';
-            navLinks.style.display = 'flex';
-        }
-    });
-    
-    // Initial check
-    if (window.innerWidth <= 768) {
-        mobileMenuBtn.style.display = 'block';
-        document.querySelector('.nav-links').style.display = 'none';
-    }
-}
 
-// Initialize mobile menu
-createMobileMenu();
 
 // Scroll to top functionality
 function createScrollToTop() {
