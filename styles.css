@@ -645,3 +645,23 @@ input:focus, textarea:focus {
         display: none !important;
     }
 }
+
+
+
+/*centrar prouyectos en movile*/
+
+
+@media (max-width: 768px) {
+    .projects-grid {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 1.5rem;
+    }
+
+    .project-card {
+        width: 90%; /* opcional, para que no toque los bordes */
+        max-width: 400px;
+    }
+}
