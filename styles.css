@@ -431,6 +431,13 @@ section {
     background-size: contain;
 }
 
+.project-image-VoxNova {
+    height: 200px;
+    background-image: url(./img/voxnovaCaratula.png);
+    background-size: contain;
+    background-position: center;
+}
+
 .project-content {
     padding: 2rem;
     text-decoration: none;
