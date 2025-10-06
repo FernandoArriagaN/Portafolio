@@ -1,4 +1,4 @@
-// Active navigation link highlight
+// Active navigation link
 ScrollTrigger.batch('section', {
     onEnter: (elements) => {
         elements.forEach(section => {
@@ -15,7 +15,7 @@ ScrollTrigger.batch('section', {
 
 
 
-// Parallax effect mejorado con GSAP
+// Parallax effect
 gsap.utils.toArray('.hero-content > *').forEach((element, index) => {
     gsap.to(element, {
         yPercent: -50 * (index + 1),
@@ -29,13 +29,13 @@ gsap.utils.toArray('.hero-content > *').forEach((element, index) => {
     });
 });
 
-// Mobile menu toggle mejorado
+// Mobile menu toggle
 function createMobileMenu() {
     const nav = document.querySelector('nav');
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
     
-    // Crear botón de menú móvil
+    // Crear botón  móvil
     const mobileMenuBtn = document.createElement('button');
     mobileMenuBtn.classList.add('mobile-menu-btn');
     mobileMenuBtn.innerHTML = '☰';
@@ -77,7 +77,7 @@ function createMobileMenu() {
         }
     });
     
-    // Responsive behavior
+    // Responsive 
     ScrollTrigger.matchMedia({
         "(max-width: 768px)": function() {
             mobileMenuBtn.style.display = 'block';
@@ -89,8 +89,6 @@ function createMobileMenu() {
         }
     });
 }
-
-// Initialize mobile menu
 createMobileMenu();
 
 // Scroll to top mejorado
@@ -262,7 +260,7 @@ function optimizePerformance() {
         }, 16); // 60fps
     });
     
-    // Preload de imágenes si las hay
+
     const imagePreloader = () => {
         const images = document.querySelectorAll('img[data-src]');
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -285,40 +283,7 @@ function optimizePerformance() {
 // Inicializar optimizaciones
 optimizePerformance();
 
-// Easter egg: Konami code
-let konamiCode = [];
-const konamiSequence = [
-    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-];
-
-document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.code);
-    konamiCode = konamiCode.slice(-10);
-    
-    if (konamiCode.join(',') === konamiSequence.join(',')) {
-        // Efecto especial!
-        gsap.to('body', {
-            filter: 'hue-rotate(180deg)',
-            duration: 2,
-            yoyo: true,
-            repeat: 1
-        });
-        
-        // Crear explosión de partículas
-        for(let i = 0; i < 50; i++) {
-            setTimeout(() => {
-                createPixelTrail(
-                    Math.random() * window.innerWidth,
-                    Math.random() * window.innerHeight
-                );
-            }, i * 20);
-        }
-        
-        konamiCode = [];
-    }
-});// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -347,7 +312,6 @@ gsap.to('nav', {
 });
 
 // Form submission para Netlify
-// Form submission para Netlify (solo revisar esta parte)
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
