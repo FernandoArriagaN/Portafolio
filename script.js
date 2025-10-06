@@ -153,7 +153,7 @@ function createScrollToTop() {
 // Initialize scroll to top button
 createScrollToTop();
 
-// Efectos adicionales de interactividad
+// Efectos interactividad
 function initInteractiveEffects() {
     // Efecto de ondas al hacer clic
     document.addEventListener('click', function(e) {
@@ -244,20 +244,17 @@ function initInteractiveEffects() {
     });
 }
 
-
-
 // Inicializar efectos interactivos
 initInteractiveEffects();
 
-// Optimización de rendimiento
 function optimizePerformance() {
-    // Throttle para eventos de mouse
+    // eventos de mouse
     let mouseTimeout;
     document.addEventListener('mousemove', function(e) {
         if (mouseTimeout) return;
         mouseTimeout = setTimeout(() => {
             mouseTimeout = null;
-        }, 16); // 60fps
+        }, 16); 
     });
     
 
@@ -311,47 +308,6 @@ gsap.to('nav', {
     }
 });
 
-// Form submission para Netlify
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(contactForm);
-    const submitBtn = contactForm.querySelector('.submit-btn');
-
-    // Animación de click
-    gsap.to(submitBtn, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 });
-
-    fetch('/', {
-      method: 'POST',
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString()
-    })
-    .then(() => {
-      // Mensaje de éxito con animación
-      gsap.timeline()
-        .to(submitBtn, { backgroundColor: '#10b981', duration: 0.3 })
-        .to(submitBtn, { textContent: '¡Enviado!', duration: 0 })
-        .to(submitBtn, { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 });
-
-      contactForm.reset();
-
-      // Restaurar botón a su estado original
-      gsap.delayedCall(2, () => {
-        gsap.to(submitBtn, { backgroundColor: '', duration: 0.3, onComplete: () => {
-          submitBtn.textContent = 'Enviar Mensaje';
-        }});
-      });
-    })
-    .catch(err => {
-      alert('Hubo un error al enviar el mensaje. Inténtalo de nuevo.');
-      console.error(err);
-    });
-  });
-}
-
-
-
 
 
 
@@ -371,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
 });
 
-// Sistema de partículas avanzado
+// Sistema de partículas 
 function initParticles() {
     canvas = document.getElementById('particlesCanvas');
     ctx = canvas.getContext('2d');
@@ -457,7 +413,7 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// Efecto de cursor pixelado y seguimiento
+//Efecto de cursor pixelado 
 function initCursorEffects() {
     const cursorFollower = document.querySelector('.cursor-follower');
     let trails = [];
@@ -480,7 +436,7 @@ function initCursorEffects() {
         }
     });
     
-    // Efectos hover para elementos interactivos
+    // Efectos hover 
     document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
         el.addEventListener('mouseenter', () => {
             gsap.to(cursorFollower, {
@@ -525,7 +481,7 @@ function createPixelTrail(x, y) {
     }, 1000);
 }
 
-// Animaciones GSAP
+
 function initGSAPAnimations() {
     // Timeline para el hero
     const heroTL = gsap.timeline();
@@ -550,24 +506,9 @@ function initGSAPAnimations() {
             ease: "power3.out"
         }, "-=0.3");
     
-    // Animación de escritura para el título
-    const titleText = document.querySelector('.hero-title');
-    const originalText = titleText.textContent;
-    titleText.textContent = '';
-    
-    gsap.delayedCall(0.5, () => {
-        let i = 0;
-        const typeInterval = setInterval(() => {
-            titleText.textContent += originalText[i];
-            i++;
-            if (i >= originalText.length) {
-                clearInterval(typeInterval);
-            }
-        }, 50);
-    });
 }
 
-// Animaciones de scroll con ScrollTrigger
+// Animaciones de scroll 
 function initScrollAnimations() {
     // Animaciones para las cards
     gsap.utils.toArray('.skill-card').forEach(card => {
@@ -628,7 +569,7 @@ function initScrollAnimations() {
         }
     });
     
-    // Animación para títulos de sección
+    // Animación para títulos 
     gsap.utils.toArray('.section-title').forEach(title => {
         gsap.fromTo(title,
             {
@@ -669,8 +610,7 @@ document.querySelector('.contact-form').addEventListener('submit', function(e) {
         // Mensaje de éxito
         alert('¡Gracias por tu mensaje! Te contactaré pronto.');
         form.reset();
-        
-        // Animación de éxito
+    
         const submitBtn = form.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = '¡Enviado!';
@@ -731,23 +671,9 @@ window.addEventListener('scroll', function() {
     });
 });
 
-// Typing effect for hero section (opcional)
-function typeEffect(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
 
-// Parallax effect for hero section
+
+// Parallax effect para titulo
 window.addEventListener('scroll', function() {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero');
@@ -760,7 +686,7 @@ window.addEventListener('scroll', function() {
 
 
 
-// Scroll to top functionality
+// Scroll to top button
 function createScrollToTop() {
     const scrollBtn = document.createElement('button');
     scrollBtn.innerHTML = '↑';
@@ -805,7 +731,6 @@ function createScrollToTop() {
 // Initialize scroll to top button
 createScrollToTop();
 
-// Performance optimization: Debounce scroll events
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -818,19 +743,8 @@ function debounce(func, wait) {
     };
 }
 
-// Apply debounce to scroll events for better performance
 const debouncedScrollHandler = debounce(function() {
-    // Handle scroll events here if needed
 }, 10);
-
-
-
-
-
-
-
-
-
 
 
 window.addEventListener('scroll', debouncedScrollHandler);
